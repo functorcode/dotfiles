@@ -1,0 +1,46 @@
+Config { font = "xft:Dejavu Sans Mono:pixelsize=24:antialias=true:hinting=true"
+       , additionalFonts = ["xft:FontAwesome:pixelsize=24"] 
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = BottomSize C 100 48
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "CYYZ" ["-t"
+                                         ,"<fc=#ffd300><fn=1>\xf185</fn> Toronto</fc> : <tempC>C",
+                                          "-L","-10","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","white"] 36000
+                    , Run Cpu ["-t",
+                               "CPU : <total>%",
+                               "-L","3","-H","50",
+                               "--normal","green","--high","red"] 10
+                    , Run Memory ["-t","<fn=1>\xf2db</fn> Mem: <usedratio>%"] 10
+                    , Run Battery ["-t", "<acstatus>" 
+                                  ,"-L","15","-H","50"
+                                  ,"-l","red","-h","green","-n","darkorange"
+                                  ,"--"
+                                  ,"-O","<fc=#ffdc71> <fn=1>\xf1e6</fn></fc>"
+                                  ,"-o","<fn=1>\xf240</fn> <left>% (<timeleft>) " 
+                                  ] 10
+                    , Run Swap [] 10
+                    , Run Wireless "wlp1s0" ["-t"
+                                   ,"<fn=1>\xf1eb</fn> <essid> <quality>"] 10
+                    , Run Date "<fn=1>\xf133</fn> %b %_d %H:%M" "date" 50
+                    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%UnsafeStdinReader% | %cpu% | %memory% * %swap% | }\
+                    \{ %wlp1s0wi% | %battery% | <fc=#ee9a00>%date%</fc> | %CYYZ%"
+       }
