@@ -118,4 +118,5 @@ fi
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
- alias dotfiles='/usr/bin/git --git-dir=/home/juned/projects/dotfiles/ --work-tree=/home/juned'
+alias dotfiles='/usr/bin/git --git-dir=/home/juned/projects/dotfiles/ --work-tree=/home/juned'
+set -o vi

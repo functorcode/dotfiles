@@ -7,7 +7,7 @@ set autoindent
 set incsearch
 set showcmd
 set nowrap
-
+set noswapfile
 set number
 set relativenumber
 set clipboard=unnamed
@@ -56,6 +56,7 @@ autocmd BufRead,BufNewFile *.wiki setlocal spell
 
 ""CtrlP settings
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+let g:ctrlp_cmd = 'CtrlPMixed'
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor

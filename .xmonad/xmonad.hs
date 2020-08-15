@@ -8,8 +8,11 @@
 --
 
 import XMonad
+import XMonad.Prompt.FuzzyMatch
 import Data.Monoid
 import System.Exit
+import XMonad.Prompt
+import XMonad.Layout.WorkspaceDir
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
@@ -61,6 +64,33 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#292d3e"
 myFocusedBorderColor = "#bbc5ff"
 
+myFont = "xft:DejaVu Sans Mono:bold:size=8:antialias=true:hinting=true:dpi:267"
+dtXPConfig :: XPConfig
+dtXPConfig = def
+      { font                = myFont
+      , bgColor             = "#292d3e"
+      , fgColor             = "#d0d0d0"
+      , bgHLight            = "#c792ea"
+      , fgHLight            = "#000000"
+      , borderColor         = "#535974"
+      , promptBorderWidth   = 0
+      , promptKeymap        = defaultXPKeymap
+--      , position            = Top
+      , position            = CenteredAt { xpCenterY = 0.3, xpWidth = 0.3 }
+      , height              = 28
+      , historySize         = 256
+      , historyFilter       = id
+      , defaultText         = []
+      , autoComplete        = Nothing --Just 100000  -- set Just 100000 for .1 sec
+      , showCompletionOnTab = False
+      , completionKey = (0, xK_Tab)
+      -- , searchPredicate     = isPrefixOf
+      , searchPredicate     = fuzzyMatch
+      , alwaysHighlight     = True
+      , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
+      }
+
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -79,7 +109,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0,xF86XK_MonBrightnessUp), spawn "lux -a 5%")    
     , ((0,xF86XK_MonBrightnessDown), spawn "lux -s 5%")    
     ,((modm , xK_Return), spawn $ XMonad.terminal conf)
-
+    ,((modm .|. shiftMask, xK_x     ), changeDir dtXPConfig)
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
@@ -201,7 +231,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = smartBorders
+myLayout = workspaceDir "~" $ smartBorders
     $  mkToggle (NOBORDERS ?? FULL ?? EOT) 
     $  avoidStruts(tiled ||| Mirror tiled ||| Full)
       where
