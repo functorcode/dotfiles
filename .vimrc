@@ -1,9 +1,10 @@
 syntax on
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoindent
+set smartindent
 set incsearch
 set showcmd
 set nowrap
@@ -12,6 +13,8 @@ set number
 set relativenumber
 set clipboard=unnamed
 set clipboard^=unnamedplus
+set foldmethod=indent
+set foldlevel=1
 set splitbelow
 set splitright
 
@@ -27,7 +30,18 @@ nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>h <C-W><C-H>
 nnoremap <leader>l <C-W><C-L>
 nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>V :hsplit<CR>
 nnoremap <leader>x :close<CR>
+nnoremap <leader>X :only<CR>
+nnoremap <TAB> za
+tnoremap jk <C-W>N  
+
+let g:haskell_indent_disable = 1
+
+command Htest vert term stack test 
+command HGHCI vert term stack ghci
+autocmd FileType haskell  nnoremap <buffer> <leader>t :Htest<CR>
+autocmd FileType haskell  nnoremap <buffer> <leader>i :HGHCI<CR>
 "inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "<C-j>"
 "inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "<C-k>"
 
@@ -89,9 +103,11 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
 
+nnoremap <silent><space>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><space>cd  :<C-u>CocList diagnostics<cr>
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -128,6 +144,10 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+Plugin 'andys8/vim-elm-syntax', { 'for': ['elm'] }
+Plugin 'dart-lang/dart-vim-plugin'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,17 +166,25 @@ let g:airline#extensions#wordcount#filetypes = '\vnotes|vimwiki|md|help|markdown
 
 
 "" Vimwiky settings
-let g:vimwiki_list = [{'path': '~/vimwiki/' , 'syntax': 'markdown', 'ext': '.md'}] 
+let g:vimwiki_list = [
+   \  {'path': '~/vimwiki/' , 'syntax': 'markdown', 'ext': '.md'} ,
+   \ {'path': '~/projects/junedmunshi.github.io/' , 'syntax': 'markdown', 'ext': '.md'}] 
 au BufRead,BufNewFile *.md set filetype=vimwiki
 autocmd BufRead,BufNewFile *.wiki setlocal spell 
 
 ""CtrlP settings
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 "let g:ctrlp_map ="<leader><leader>"
+"
+"nnoremap <leader><leader> :Files<CR>
+"nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>/ :BLines<CR>
+nnoremap <leader>f :Ag<CR>
+"
 nnoremap <leader><leader> :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>m :CtrlPMRUFiles<CR>
-nnoremap <leader>t :CtrlPTag<CR>
+"nnoremap <leader>T :CtrlPTag<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 if executable('ag')

@@ -1,0 +1,19 @@
+#https://unix.stackexchange.com/questions/20570/mutt-how-to-safely-store-password
+source ~/.config/mutt/account.muttrc
+#set folder= "imaps://youremail@IMAPSERVER:PORT"
+#set smtp_url = "smtps://youremail@SMTPSERVER:PORT"
+#set from = "your email"
+#set my_pass = "`pass ACCOUNT"
+#set realname="NAME"
+set imap_pass= $my_pass 
+set smtp_pass= $my_pass 
+set spoolfile= "+INBOX"
+set record = "+Sent"
+set trash= "+Trash"
+set postponed= "+Drafts"
+mailboxes =INBOX =Sent =Trash =Drafts =Junk 
+source ~/.config/mutt/color.muttrc
+bind index G imap-fetch-mail
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats

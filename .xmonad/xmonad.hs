@@ -24,6 +24,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import Text.Read
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -112,6 +113,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,((modm .|. shiftMask, xK_x     ), changeDir dtXPConfig)
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_d     ), spawn "/home/juned/.config/dmenu/passmenu.sh --type")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -119,6 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
+    , ((modm .|. shiftMask, xK_s     ), saveCurrentWorkspace)
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
 
@@ -247,6 +250,22 @@ myLayout = workspaceDir "~" $ smartBorders
          -- Percent of screen to increment by when resizing panes
          delta   = 3/100
 
+--https://www.reddit.com/r/haskell/comments/29rr78/writing_a_plugin_to_save_xmonad_state/
+getLayout :: X (Layout Window)
+getLayout = gets $ W.layout . W.workspace . W.current . windowset
+
+saveCurrentWorkspace :: X ()
+saveCurrentWorkspace = do
+  Layout x <- getLayout
+  liftIO $ writeFile "/home/juned/.xmonad/currentLayout" (show x)
+
+loadCurrentWorkspace :: X ()
+loadCurrentWorkspace = do
+    string <- liftIO $ readFile "/home/juned/.xmonad/currentLayout"
+    Layout xProxy <- getLayout
+    case readMaybe string of
+       Just x -> setLayout (Layout (x `asTypeOf` xProxy))
+       Nothing -> return () -- or complain that loadWorkspace is failing to parse the currentLayout file
 ------------------------------------------------------------------------
 -- Window rules:
 
@@ -297,6 +316,8 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
   spawn "nitrogen --restore &"
+  loadCurrentWorkspace
+
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

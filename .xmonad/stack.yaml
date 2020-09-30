@@ -29,6 +29,7 @@ resolver: lts-16.5
 #   - auto-update
 #   - wai
 packages:
+- .
 - xmobar-git
 - xmonad-git
 - xmonad-contrib-git

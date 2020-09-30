@@ -119,6 +119,20 @@ fi
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 alias dotfiles='/usr/bin/git --git-dir=/home/juned/projects/dotfiles/ --work-tree=/home/juned'
-set -o vi
+alias ..='cd ..'
+alias .2='cd ../../'
 
+set -o vi
+eval "$(fasd --init auto)"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
+#export FZF_DEFAULT_COMMAND='ag -l --nocolor -U --ignore .git/ --ignore .stack-work/ --hidden -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export PATH="$PATH:$HOME/.npm/bin"
+export PATH="$PATH:$HOME/tools/flutter/bin"
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/home/juned/tools/thunderbird/
