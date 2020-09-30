@@ -121,6 +121,7 @@ export PATH="$HOME/gems/bin:$PATH"
 alias dotfiles='/usr/bin/git --git-dir=/home/juned/projects/dotfiles/ --work-tree=/home/juned'
 alias ..='cd ..'
 alias .2='cd ../../'
+alias nm='neomutt'
 
 set -o vi
 eval "$(fasd --init auto)"
