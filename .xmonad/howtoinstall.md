@@ -9,6 +9,7 @@ stack install
 
 chmod a+x build
 sudo cp xmonad.desktop /usr/share/xsessions/
+sudo cp xmonad.start /usr/local/bin/
 sudo apt-get install fonts-font-awesome   --required for xmobar
 xmonad --recompile
 ```
