@@ -44,16 +44,6 @@ autocmd FileType haskell  nnoremap <buffer> <leader>t :Htest<CR>
 autocmd FileType haskell  nnoremap <buffer> <leader>i :HGHCI<CR>
 "inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "<C-j>"
 "inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "<C-k>"
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -171,6 +161,26 @@ let g:vimwiki_list = [
    \ {'path': '~/projects/junedmunshi.github.io/' , 'syntax': 'markdown', 'ext': '.md'}] 
 au BufRead,BufNewFile *.md set filetype=vimwiki
 autocmd BufRead,BufNewFile *.wiki setlocal spell 
+au filetype vimwiki silent! iunmap <buffer> <Tab>
+au filetype vimwiki silent! iunmap <buffer> <S-Tab>
+let g:vimwiki_table_mappins = 0
+
+hi VimwikiHeader1 cterm=bold ctermfg=177 
+hi VimwikiHeader2 cterm=bold ctermfg=167
+hi VimwikiHeader3 cterm=bold ctermfg=214
+hi VimwikiHeader4 cterm=bold ctermfg=156
+hi VimwikiHeader5 cterm=bold ctermfg=130
+hi VimwikiHeader6 cterm=bold ctermfg=69
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 ""CtrlP settings
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher

@@ -1,0 +1,2 @@
+blueman-applet &
+xmodmap ~/.xmodmap
