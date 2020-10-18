@@ -112,8 +112,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,((modm , xK_Return), spawn $ XMonad.terminal conf)
     ,((modm .|. shiftMask, xK_x     ), changeDir dtXPConfig)
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
-    , ((modm,               xK_d     ), spawn "/home/juned/.config/dmenu/passmenu.sh --type")
+    , ((modm,               xK_d     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "/home/juned/.config/dmenu/passmenu.sh --type")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -176,10 +176,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_e     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_c     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
