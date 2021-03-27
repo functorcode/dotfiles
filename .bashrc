@@ -140,3 +140,4 @@ export PATH=$PATH:/home/juned/tools/thunderbird/
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+PS1='\[\033[01;34m\]\w\[\033[00m\]\$'

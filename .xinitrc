@@ -1,5 +1,5 @@
 bluetoothctl power on &
 nitrogen --restore &
-xrandr --output HDMI2 --mode 1920x1080 --scale 1.25x1.25 --right-of eDP1
+xrandr --output HDMI-1 --mode 1920x1080 --scale 1.5x1.5 --right-of eDP-1
 xrdb -merge ~/.Xresources
 exec i3
