@@ -18,4 +18,6 @@ export PATH=$PATH:/home/juned/.local/bin
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+export LC_ALL="en_US.UTF-8"
 bindkey -v
+

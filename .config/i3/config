@@ -48,7 +48,7 @@ bindcode 237 exec brightnessctl -d "smc::kbd_backlight" s 5%-
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt 
+bindsym $mod+Return exec termite 
 #i3-sensible-terminal
 
 # kill focused window
