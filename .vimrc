@@ -190,7 +190,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "nnoremap <leader><leader> :Files<CR>
 "nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>f :Ag<CR>
+nnoremap <leader>f :Rg<CR>
 "
 nnoremap <leader><leader> :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>

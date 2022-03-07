@@ -1,0 +1,107 @@
+#ethernet
+netctl start custom-dhcp-profile
+systemctl status dhcpcd.service
+systemctl start dhcpcd.service
+
+#wifi
+sudo pacman -S dialog
+sudo pacman -S wpa_supplicant
+sudo killall dhcpcd
+systemctl start dhcpcd.service
+sudo ip link set wlp3s0 down
+sudo wifi-menu
+netctl list
+sudo netctl enable wlp3s0-BELL443
+sudo netctl start wlp3s0-BELL443
+netctl start wlp3s0-BELL443
+
+#lenovo backlight
+sudo pacman -S acpilight 
+sudo vim /etc/udev/rules.d/90-backlight.rules
+gpasswd -a juned video
+sudo gpasswd -a juned video
+shutdown now
+exit
+startx
+cat /sys/class/backlight/acpi_video0/max_brightness
+cat /sys/class/backlight/intel_backlight/max_brightness
+sudo pacman -S brightnessctl 
+
+#audio
+sudo pacman -S pactl
+sudo pacman -S pulseaudio
+sudo pacman -S paman
+sudo pacman -S alsa-utils
+sudo pacman -S pulse-alsa
+sudo pacman -S pulseaudio-alsa
+sudo pacman -S pulseaudio-bluetooth 
+sudo pacman -S pulseaudio
+pulseaudio -v
+sudo pacman -S alsa-tools
+alsamixer
+
+#power
+pacman -S tlp tlp-rdw
+sudo pacman -S tlp tlp-rdw
+tlp-stat -b
+sudo tlp-stat -b
+sudo pacman -S acpi_call
+systemctl enable tlp.service
+systemctl enable NetworkManager-dispatcher.service
+systemctl enable NetworkManager-dispatcher.service
+systemctl mask systemd-rfkill.service
+systemctl mask systemd-rfkill.socket
+tlp-stat -s
+shutdown now
+startx
+
+#bluetooth
+sudo pacman -S bluez
+sudo pacman -S bluez-utils
+bluetoothctl
+systemctl enable bluetooth.service
+systemctl start bluetooth.service
+bluetoothctl
+
+#fonts-becareful
+sudo pacman -S ttf-dejavu ttf-liberation noto-fonts
+sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
+sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
+/etc/profile.d/freetype2.sh
+sudo vim /etc/profile.d/freetype2.sh
+vim /etc/fonts/local.conf
+sudo vim /etc/fonts/local.conf
+mkdir ~/.config/alacritty/alacritty.yml
+mkdir ~/.config/alacritty/
+vim ~/.config/alacritty/alacritty.yml
+sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+fc-match "Noto Sans"
+fc-match "mono"
+
+#redshift
+pacman -S redshift
+sudo pacman -S redshift
+redshift
+mkdir ~/.config/redshift
+vim ~/.config/redshift/redshift.conf
+redshift
+redshift -P -O 1000
+redshift -P -O 1500
+redshift -P -O 30000
+redshift -P -O 10000
+redshift -P -O 250000
+redshift -P -O 25000
+redshift -P -O 9000
+redshift -P -O 5000
+
+#php
+sudo pacman -S apache php mariadb
+mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+mysql -u root -p
+systemctl start mariadb.service
+sudo pacman -S phpmyadmin
+sudo mysql -u root -p
+systemctl start httpd.service
+systemctl status httpd.service
