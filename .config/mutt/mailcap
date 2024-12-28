@@ -1,1 +1,0 @@
-text/html; /usr/bin/w3m -cols 80 -dump -T text/html '%s'; copiousoutput

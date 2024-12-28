@@ -1,4 +1,0 @@
-xrandr --dpi 227
-xrandr --output HDMI-1 --scale 2x2 
-xrdb -merge ~/.Xresources
-xmonad
